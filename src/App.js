@@ -1,5 +1,5 @@
 import React from 'react';
-import{ BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Switch, Route, HashRouter } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import User from './components/users/User';
 import Alert from './components/layout/Alert';
@@ -11,40 +11,26 @@ import AlertState from './context/alert/AlertState';
 import './App.css';
 
 const App = () => {
-
-//   async componentDidMount() {
-//     console.log(process.env.REACT_APP_GITHUB_CLIENT_SECRET);
-//     this.setState({ loading: true });
-
-//     const res = await axios.get(`https://api.github.com/users?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}
-// &client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
-
-//     this.setState({ users: res.data, loading: false });
-//   }
-
-
-
-    return (
-      <GithubState>
-        <AlertState>
-      <Router>
-      <div className="App">
-        <Navbar />
-        <div className="container">
-          <Alert />
-          <Switch>
-            <Route exact path='/' component={Home} />
-            <Route exact path='/about' component={About} />
-            <Route exact path='/users/:login' component={User}/>
-            <Route component={NotFound} />
-          </Switch>
-        </div>
-      </div>
-      </Router>
+  return (
+    <GithubState>
+      <AlertState>
+        <HashRouter basename="/">
+          <div className="App">
+            <Navbar />
+            <div className="container">
+              <Alert />
+              <Switch>
+                <Route exact path='/' component={Home} />
+                <Route exact path='/about' component={About} />
+                <Route exact path='/users/:login' component={User}/>
+                <Route component={NotFound} />
+              </Switch>
+            </div>
+          </div>
+          </HashRouter>
       </AlertState>
-      </GithubState>
-    );
-    
-}
+    </GithubState>
+  );
+};
 
 export default App;
